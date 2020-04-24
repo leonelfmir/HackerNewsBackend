@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.API", "HackerNews.API\HackerNews.API.csproj", "{566F71E0-6578-45F4-8A68-F6F3D8FED4A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Domain", "HackerNews.Domain\HackerNews.Domain.csproj", "{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Persistence", "HackerNews.Persistence\HackerNews.Persistence.csproj", "{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{566F71E0-6578-45F4-8A68-F6F3D8FED4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{566F71E0-6578-45F4-8A68-F6F3D8FED4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{566F71E0-6578-45F4-8A68-F6F3D8FED4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
