@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using HackerNews.API.Extensions;
 
 namespace HackerNews.API
 {
@@ -21,10 +22,12 @@ namespace HackerNews.API
         }
 
         public IConfiguration Configuration { get; }
+        private const string CORS_POLICY_NAME = "CorsPolicy";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureCors(CORS_POLICY_NAME);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -42,6 +45,7 @@ namespace HackerNews.API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(CORS_POLICY_NAME);
             app.UseMvc();
         }
     }
