@@ -44,6 +44,8 @@ namespace HackerNews.API
                 app.UseHsts();
             }
 
+            app.GlobalExtensionHandler();
+
             app.UseHttpsRedirection();
             app.UseCors(CORS_POLICY_NAME);
             app.UseMvc();
