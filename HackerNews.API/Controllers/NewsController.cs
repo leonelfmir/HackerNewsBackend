@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HackerNews.API.Filters;
+using HackerNews.API.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HackerNews.API.Controllers
@@ -11,14 +13,16 @@ namespace HackerNews.API.Controllers
     public class NewsController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(new string[] { "value1", "value2" });
         }
 
-        [HttpPost]
-        public void SearchTitle([FromBody] string value)
+        [ModelValidation]
+        [HttpPost("search")]
+        public async Task<IActionResult> SearchTitle([FromBody] NewsSearchResource value)
         {
+            return Ok(value.Search);
         }
 
 
