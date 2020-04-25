@@ -46,6 +46,24 @@ namespace HackerNews.API.Tests.Controller
             mockedNewsService.Verify(svc => svc.ListAsync(), Times.Once());
         }
 
+        [Fact]
+        public async Task Get_ShouldReturnBadRequestWithMessageIfErroOnService()
+        {
+            // Arrange
+            const string errorMessage = "Error";
+            var mockNewsService = new Mock<INewsService>();
+            var responseFixture = new GenericResponse<IEnumerable<New>>(errorMessage);
+            mockNewsService.Setup(svc => svc.ListAsync()).ReturnsAsync(responseFixture);
+            var controller = new NewsController(_mapper, mockNewsService.Object);
+
+            // Act
+            var result = await controller.Get();
+
+            // Asset
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            badRequestResult.Value.Should().Be(errorMessage);
+        }
+
         [Theory, AutoData]
         public async Task Get_FieldsShouldBeTheSame(List<New> newsFixture)
         {
