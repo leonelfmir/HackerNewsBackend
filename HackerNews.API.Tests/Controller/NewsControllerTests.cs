@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using AutoFixture.Xunit2;
+using AutoMapper;
+using FluentAssertions;
 using HackerNews.API.Controllers;
 using HackerNews.API.Mapping;
 using HackerNews.API.Resources;
@@ -19,34 +21,9 @@ namespace HackerNews.API.Tests.Controller
     public class NewsControllerTests
     {
         private IMapper _mapper;
-        private Mock<INewsService> _mockNewsService;
-
-        private New _newFixture;
-
-        private IEnumerable<New> _newFixtures;
-
-        private GenericResponse<IEnumerable<New>> _responseFixture;
 
         public NewsControllerTests()
         {
-            _newFixture = new New
-            {
-                By = "a",
-                Id = 1,
-                Time = DateTime.Now,
-                Title = "t",
-                Type = "ty",
-                Url = "url"
-            };
-
-            _newFixtures = new List<New> { _newFixture };
-
-            _responseFixture = new GenericResponse<IEnumerable<New>>(_newFixtures);
-
-            _mockNewsService = new Mock<INewsService>();
-
-            _mockNewsService.Setup(svc => svc.ListAsync()).ReturnsAsync(_responseFixture);
-
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ModelToResourceProfile());
@@ -55,24 +32,26 @@ namespace HackerNews.API.Tests.Controller
             _mapper = config.CreateMapper();
         }
 
-        [Fact]
-        public async Task Get_ShouldCallNewsServiceOnce()
+        [Theory, AutoData]
+        public async Task Get_ShouldCallNewsServiceOnce(List<New> newsFixture)
         {
             // Arrange
-            var controller = new NewsController(_mapper, _mockNewsService.Object);
+            var mockedNewsService = createNewsService(newsFixture);
+            var controller = new NewsController(_mapper, mockedNewsService.Object);
 
             // Act
             var result = await controller.Get();
 
             // Asset
-            _mockNewsService.Verify(svc => svc.ListAsync(), Times.Once());
+            mockedNewsService.Verify(svc => svc.ListAsync(), Times.Once());
         }
-        
-        [Fact]
-        public async Task Get_TitlesShouldBeTheSame()
+
+        [Theory, AutoData]
+        public async Task Get_FieldsShouldBeTheSame(List<New> newsFixture)
         {
             // Arrange
-            var controller = new NewsController(_mapper, _mockNewsService.Object);
+            var mockedNewsService = createNewsService(newsFixture);
+            var controller = new NewsController(_mapper, mockedNewsService.Object);
 
             // Act
             var result = await controller.Get();
@@ -80,24 +59,20 @@ namespace HackerNews.API.Tests.Controller
             // Asset
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnNews = Assert.IsAssignableFrom<IEnumerable<NewResource>>(okResult.Value);
-            var firstValue = returnNews.FirstOrDefault();
-            Assert.Equal(firstValue?.Title, _newFixture.Title);
+            returnNews.Should().Equal(newsFixture, (rsc, fix) =>
+            {
+                return rsc.Author == fix.By && rsc.Title == fix.Title && rsc.Url == fix.Url;
+            });
+            
         }
-        
-        [Fact]
-        public async Task Get_ByShouldBeAuthor()
+
+        private Mock<INewsService> createNewsService(List<New> newsFixture)
         {
-            // Arrange
-            var controller = new NewsController(_mapper, _mockNewsService.Object);
+            var responseFixture = new GenericResponse<IEnumerable<New>>(newsFixture);
 
-            // Act
-            var result = await controller.Get();
-
-            // Asset
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnNews = Assert.IsAssignableFrom<IEnumerable<NewResource>>(okResult.Value);
-            var firstValue = returnNews.FirstOrDefault();
-            Assert.Equal(firstValue?.Author, _newFixture.By);
+            var mockNewsService = new Mock<INewsService>();
+            mockNewsService.Setup(svc => svc.ListAsync()).ReturnsAsync(responseFixture);
+            return mockNewsService;
         }
     }
 }
