@@ -35,8 +35,8 @@ namespace HackerNews.Persistence.Repositories
 
         public async Task<IEnumerable<New>> SearchByTitleAsync(string value)
         {
-            return new List<New>();
-
+            var news = await GetNews();
+            return news.Where(n => n != null).Where(n => n.Title.Contains(value, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private async Task<IEnumerable<New>> GetNews()
