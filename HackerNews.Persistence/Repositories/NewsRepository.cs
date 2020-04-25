@@ -14,6 +14,7 @@ namespace HackerNews.Persistence.Repositories
 {
     public class NewsRepository : INewsRepository
     {
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly IMemoryCache _memoryCache;
         
         private const string cacheKey = "news";
@@ -21,11 +22,12 @@ namespace HackerNews.Persistence.Repositories
         private readonly string _getItemUrl;
         private readonly string _newIdsUrl;
 
-        public NewsRepository(IConfiguration configuration, IMemoryCache memoryCache)
+        public NewsRepository(IConfiguration configuration, IHttpClientFactory httpClientFactory, IMemoryCache memoryCache)
         {
             _maxItemUrl = configuration["ApiUrls:maxItem"];
             _getItemUrl = configuration["ApiUrls:itemById"];
             _newIdsUrl = configuration["ApiUrls:newIds"];
+            _httpClientFactory = httpClientFactory;
             _memoryCache = memoryCache;
         }
 
@@ -97,7 +99,7 @@ namespace HackerNews.Persistence.Repositories
 
         private async Task<int> GetMaxItem()
         {
-            using (var httpClient = new HttpClient())
+            using (var httpClient = _httpClientFactory.CreateClient())
             {
                 using (var response = await httpClient.GetAsync(_maxItemUrl))
                 {
@@ -119,7 +121,7 @@ namespace HackerNews.Persistence.Repositories
 
         private async Task<IEnumerable<int>> GetNewsIds()
         {
-            using (var httpClient = new HttpClient())
+            using (var httpClient = _httpClientFactory.CreateClient())
             {
                 using (var response = await httpClient.GetAsync(_newIdsUrl))
                 {
@@ -133,7 +135,7 @@ namespace HackerNews.Persistence.Repositories
         private async Task<New> GetNewById(int id)
         {
             var apiUrl = string.Format(_getItemUrl, id);
-            using (var httpClient = new HttpClient())
+            using (var httpClient = _httpClientFactory.CreateClient())
             {
                 using (var response = await httpClient.GetAsync(apiUrl))
                 {

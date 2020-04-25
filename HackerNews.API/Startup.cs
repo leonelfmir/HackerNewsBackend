@@ -35,6 +35,7 @@ namespace HackerNews.API
 
             services.AddAutoMapper(typeof(Startup));
             services.DIRegistration();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
