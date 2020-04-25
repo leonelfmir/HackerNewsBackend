@@ -13,7 +13,8 @@ namespace HackerNews.API.Mapping
     {
         public ModelToResourceProfile()
         {
-            CreateMap<New, NewResource>();
+            CreateMap<New, NewResource>()
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.By));
         }
     }
 }
