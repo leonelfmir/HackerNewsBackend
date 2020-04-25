@@ -1,4 +1,6 @@
-﻿using HackerNews.Domain.Services;
+﻿using HackerNews.Domain.Repositories;
+using HackerNews.Domain.Services;
+using HackerNews.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,7 @@ namespace HackerNews.API.Extensions
         public static void DIRegistration(this IServiceCollection services)
         {
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<INewsRepository, NewsRepository>();
         }
-
     }
 }

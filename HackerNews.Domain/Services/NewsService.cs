@@ -1,5 +1,6 @@
 ﻿using HackerNews.Domain.Communication;
 using HackerNews.Domain.Models;
+using HackerNews.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,26 +11,42 @@ namespace HackerNews.Domain.Services
 {
     public class NewsService : INewsService
     {
-        private New TestNew = new New
+        private readonly INewsRepository _newsRepository;
+       
+
+        public NewsService(INewsRepository newsRepository)
         {
-            By = "a",
-            Id = 1,
-            Time = DateTime.Now,
-            Title = "t",
-            Type = "ty",
-            Url = "url"
-        };
+            this._newsRepository = newsRepository;
+        }
 
 
         public async Task<GenericResponse<IEnumerable<New>>> ListAsync()
         {
-            return new GenericResponse<IEnumerable<New>>( new List<New> { TestNew });
+            try
+            {
+                var news = await _newsRepository.ListAsync();
+                return new GenericResponse<IEnumerable<New>>(news);
+            }
+            catch (Exception ex)
+            {
+                // we can implement login here to capture the error
+                return new GenericResponse<IEnumerable<New>>("Error loading news");
+            }
         }
 
 
         public async Task<GenericResponse<IEnumerable<New>>> SearchAsync(string value)
         {
-            return new GenericResponse<IEnumerable<New>>( new List<New> { TestNew });
+            try
+            {
+                var news = await _newsRepository.SearchByTitleAsync(value);
+                return new GenericResponse<IEnumerable<New>>(news);
+            }
+            catch (Exception ex)
+            {
+                // we can implement login here to capture the error
+                return new GenericResponse<IEnumerable<New>>("Error loading news");
+            }
         }
     }
 }
