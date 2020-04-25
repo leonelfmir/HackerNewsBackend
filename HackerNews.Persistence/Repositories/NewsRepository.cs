@@ -1,5 +1,6 @@
 ﻿using HackerNews.Domain.Models;
 using HackerNews.Domain.Repositories;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,17 @@ namespace HackerNews.Persistence.Repositories
 {
     public class NewsRepository : INewsRepository
     {
+        private readonly string _maxItemUrl;
+        private readonly string _getItemUrl;
+        private readonly string _newIdsUrl;
+
+        public NewsRepository(IConfiguration configuration)
+        {
+            _maxItemUrl = configuration["ApiUrls:maxItem"];
+            _getItemUrl = configuration["ApiUrls:itemById"];
+            _newIdsUrl = configuration["ApiUrls:newIds"];
+        }
+
         public async Task<IEnumerable<New>> ListAsync()
         {
             return await GetNews();
@@ -21,6 +33,19 @@ namespace HackerNews.Persistence.Repositories
         {
             return new List<New>();
 
+        }
+
+        private async Task<int> GetMaxItem()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(_maxItemUrl))
+                {
+                    var maxItemsResult = await response.Content.ReadAsStringAsync();
+                    var  maxItem = JsonConvert.DeserializeObject<int>(maxItemsResult);
+                    return maxItem;
+                }
+            }
         }
 
         private async Task<IEnumerable<New>> GetNews()
@@ -34,10 +59,9 @@ namespace HackerNews.Persistence.Repositories
 
         private async Task<IEnumerable<int>> GetNewsIds()
         {
-            const string apiUrl = "https://hacker-news.firebaseio.com/v0/newstories.json";
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(apiUrl))
+                using (var response = await httpClient.GetAsync(_newIdsUrl))
                 {
                     var news = await response.Content.ReadAsStringAsync();
                     var lst = JsonConvert.DeserializeObject<List<int>>(news);
@@ -48,7 +72,7 @@ namespace HackerNews.Persistence.Repositories
         
         private async Task<New> GetNewById(int id)
         {
-            var apiUrl = $"https://hacker-news.firebaseio.com/v0/item/{id}.json";
+            var apiUrl = string.Format(_getItemUrl, id);
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(apiUrl))
