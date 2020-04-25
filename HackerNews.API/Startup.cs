@@ -32,7 +32,9 @@ namespace HackerNews.API
             services.ConfigureCors(CORS_POLICY_NAME);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+
             services.AddAutoMapper(typeof(Startup));
+            services.DIRegistration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

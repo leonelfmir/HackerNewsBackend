@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using HackerNews.Domain.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,11 @@ namespace HackerNews.API.Extensions
                     );
             });
         }
+
+        public static void DIRegistration(this IServiceCollection services)
+        {
+            services.AddScoped<INewsService, NewsService>();
+        }
+
     }
 }

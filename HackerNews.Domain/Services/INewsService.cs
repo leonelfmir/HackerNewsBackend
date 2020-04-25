@@ -1,4 +1,5 @@
-﻿using HackerNews.Domain.Models;
+﻿using HackerNews.Domain.Communication;
+using HackerNews.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,13 @@ namespace HackerNews.Domain.Services
         /// Get all news
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<New>> ListAsync();
+        Task<GenericResponse<IEnumerable<New>>> ListAsync();
 
         /// <summary>
         /// Search news by value
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        Task<IEnumerable<New>> SearchAsync(string value);
+        Task<GenericResponse<IEnumerable<New>>> SearchAsync(string value);
     }
 }
