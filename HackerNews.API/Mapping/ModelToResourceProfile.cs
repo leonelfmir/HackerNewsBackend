@@ -14,7 +14,8 @@ namespace HackerNews.API.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<New, NewResource>()
-                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.By));
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.By))
+                .ForMember(dest => dest.Time, opt => opt.MapFrom(src => DateTimeOffset.FromUnixTimeSeconds(src.Time).UtcDateTime));
         }
     }
 }
