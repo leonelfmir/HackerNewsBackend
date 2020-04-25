@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.API", "HackerNews.API\HackerNews.API.csproj", "{566F71E0-6578-45F4-8A68-F6F3D8FED4A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.API", "HackerNews.API\HackerNews.API.csproj", "{566F71E0-6578-45F4-8A68-F6F3D8FED4A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Domain", "HackerNews.Domain\HackerNews.Domain.csproj", "{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.Domain", "HackerNews.Domain\HackerNews.Domain.csproj", "{C6800E9B-91CC-4584-A8F3-8EC1ADE2B7D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Persistence", "HackerNews.Persistence\HackerNews.Persistence.csproj", "{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.Persistence", "HackerNews.Persistence\HackerNews.Persistence.csproj", "{AEFD4CB9-7614-4A8C-BBD5-BC5404759F36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.API.Tests", "HackerNews.API.Tests\HackerNews.API.Tests.csproj", "{7DE7EA00-3A43-44B8-8271-624B2E3A6716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.API.Tests", "HackerNews.API.Tests\HackerNews.API.Tests.csproj", "{7DE7EA00-3A43-44B8-8271-624B2E3A6716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Domain.Tests", "HackerNews.Domain.Tests\HackerNews.Domain.Tests.csproj", "{1A22A06A-D2BA-48AC-84FA-BC72232A685C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7DE7EA00-3A43-44B8-8271-624B2E3A6716}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE7EA00-3A43-44B8-8271-624B2E3A6716}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE7EA00-3A43-44B8-8271-624B2E3A6716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A22A06A-D2BA-48AC-84FA-BC72232A685C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A22A06A-D2BA-48AC-84FA-BC72232A685C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A22A06A-D2BA-48AC-84FA-BC72232A685C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A22A06A-D2BA-48AC-84FA-BC72232A685C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
