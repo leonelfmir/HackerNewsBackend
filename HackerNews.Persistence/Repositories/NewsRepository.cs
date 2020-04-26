@@ -99,15 +99,10 @@ namespace HackerNews.Persistence.Repositories
 
         private async Task<int> GetMaxItem()
         {
-            using (var httpClient = _httpClientFactory.CreateClient())
-            {
-                using (var response = await httpClient.GetAsync(_maxItemUrl))
-                {
-                    var maxItemsResult = await response.Content.ReadAsStringAsync();
-                    var maxItem = JsonConvert.DeserializeObject<int>(maxItemsResult);
-                    return maxItem;
-                }
-            }
+            var client = _httpClientFactory.CreateClient();
+            var result = await client.GetStringAsync(_maxItemUrl);
+            var maxItem = JsonConvert.DeserializeObject<int>(result);
+            return maxItem;
         }
 
         private async Task<IEnumerable<New>> GetNewsFromApi()
@@ -121,29 +116,19 @@ namespace HackerNews.Persistence.Repositories
 
         private async Task<IEnumerable<int>> GetNewsIds()
         {
-            using (var httpClient = _httpClientFactory.CreateClient())
-            {
-                using (var response = await httpClient.GetAsync(_newIdsUrl))
-                {
-                    var news = await response.Content.ReadAsStringAsync();
-                    var lst = JsonConvert.DeserializeObject<List<int>>(news);
-                    return lst;
-                }
-            }
+            var client = _httpClientFactory.CreateClient();
+            var result = await client.GetStringAsync(_newIdsUrl);
+            var news = JsonConvert.DeserializeObject<List<int>>(result);
+            return news;
         }
 
         private async Task<New> GetNewById(int id)
         {
             var apiUrl = string.Format(_getItemUrl, id);
-            using (var httpClient = _httpClientFactory.CreateClient())
-            {
-                using (var response = await httpClient.GetAsync(apiUrl))
-                {
-                    var newResult = await response.Content.ReadAsStringAsync();
-                    var newObject = JsonConvert.DeserializeObject<New>(newResult);
-                    return newObject;
-                }
-            }
+            var client = _httpClientFactory.CreateClient();
+            var result = await client.GetStringAsync(apiUrl);
+            var newObject = JsonConvert.DeserializeObject<New>(result);
+            return newObject;
         }
     }
 }
