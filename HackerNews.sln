@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.Persistence", "H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.API.Tests", "HackerNews.API.Tests\HackerNews.API.Tests.csproj", "{7DE7EA00-3A43-44B8-8271-624B2E3A6716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Domain.Tests", "HackerNews.Domain.Tests\HackerNews.Domain.Tests.csproj", "{1A22A06A-D2BA-48AC-84FA-BC72232A685C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.Domain.Tests", "HackerNews.Domain.Tests\HackerNews.Domain.Tests.csproj", "{1A22A06A-D2BA-48AC-84FA-BC72232A685C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Persistence.Tests", "HackerNews.Persistence.Tests\HackerNews.Persistence.Tests.csproj", "{AF6F1020-BC10-4D74-9788-644CFBD33CF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNews.Persistence.Tests", "HackerNews.Persistence.Tests\HackerNews.Persistence.Tests.csproj", "{AF6F1020-BC10-4D74-9788-644CFBD33CF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.IntegetrationTests", "HackerNews.IntegetrationTests\HackerNews.IntegetrationTests.csproj", "{3F8AC91D-5924-4343-9B5A-9003D946E689}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AF6F1020-BC10-4D74-9788-644CFBD33CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF6F1020-BC10-4D74-9788-644CFBD33CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF6F1020-BC10-4D74-9788-644CFBD33CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8AC91D-5924-4343-9B5A-9003D946E689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8AC91D-5924-4343-9B5A-9003D946E689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8AC91D-5924-4343-9B5A-9003D946E689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8AC91D-5924-4343-9B5A-9003D946E689}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
